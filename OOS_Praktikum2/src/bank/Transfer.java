@@ -1,34 +1,35 @@
 package bank;
-
+//eine Klasse, um einen Transfer zwischen 2 Personen zu tätigen
 public class Transfer extends Transaction
         implements CalculateBill{
-    //
+    //privates Attribut sender
     private String sender;
-    //
+    //privates Attribut Empfänger
     private String recipient;
 
     /**
-     *
+     *default Konstruktor
      */
     public Transfer(){}
 
     /**
-     *
-     * @param date
-     * @param amount
-     * @param description
+     * Konstruktor, um 3 Attribute zu konstruktiiren
+     * @param date Attribut, dass Datum angibt, allerdings aus der Superklasse übernommen
+     * @param amount Attribut, dass Betrag angibt, allerdings aus der Superklasse übernommen
+     * @param description Attribut, dass Beschreibung angibt, allerdings aus der Superklasse übernommen
      */
     public Transfer(String date, double amount, String description){
         super(date, amount, description);
     }
 
     /**
-     *
-     * @param date
-     * @param amount
-     * @param description
-     * @param sender
-     * @param recipient
+     * Konstrukor, um die 3 üblichen Attribute zu konstruiren, zusätzlich wird das Attribut amount neu gesettet,
+     * da der Inhalt sich ändert (überprüfen, ob der Betrag <= 0 ist und die funktion calculate() ausführen(unnötig?))
+     * @param date Attribut, dass Datum angibt, allerdings aus der Superklasse übernommen
+     * @param amount Attribut, dass Betrag angibt, allerdings aus der Superklasse übernommen
+     * @param description Attribut, dass Beschreibung angibt, allerdings aus der Superklasse übernommen
+     * @param sender Attribut Sender wird gesettet
+     * @param recipient Attribut Empfänger wird gesettet
      */
     public Transfer(String date, double amount, String description, String sender, String recipient){
         super(date, amount, description);
@@ -38,16 +39,16 @@ public class Transfer extends Transaction
     }
 
     /**
-     *
-     * @param transfer
+     *Copy-Konstruktor, der identisch mit dem normalen Konstruktor ist
+     * @param transfer wird an den Copy-Konstruktor gegeben. Somit übernimmt der CopyKonstruktor die Attribute(den Objekt)
      */
     public Transfer(Transfer transfer){
         this(transfer.date, transfer.amount, transfer.description, transfer.sender, transfer.recipient);
     }
 
     /**
-     *
-     * @param amount
+     * Setter für amount, wobei es programmatisch überprüft wird, ob amount größergleich 0 ist. (größer macht mehr Sinn?)
+     * @param amount Settet das Attribut amount(Betrag)
      */
     public void setAmount(double amount){
         if(amount <= 0){
@@ -59,32 +60,32 @@ public class Transfer extends Transaction
     }
 
     /**
-     *
-     * @return
+     * Getter für sender
+     * @return gibt sender zurück
      */
     public String getSender(){
         return sender;
     }
 
     /**
-     *
-     * @param sender
+     * Setter für sender
+     * @param sender settet mit dem Parameter den sender dieser Klasse
      */
     public void setSender(String sender){
         this.sender = sender;
     }
 
     /**
-     *
-     * @return
+     * Getter für recipient
+     * @return gibt recipient zurück
      */
     public String getRecipient(){
         return recipient;
     }
 
     /**
-     *
-     * @param recipient
+     * Setter für recipient
+     * @param recipient settet mit dem Parameter den recipient dieser Klasse
      */
     public void setRecipient(String recipient){
         this.recipient = recipient;
@@ -92,17 +93,17 @@ public class Transfer extends Transaction
 
 
     /**
-     *
-     * @return
+     * toString wird überschrieben
+     * @return gibt den toString() aus der Superklasse (Transaktion) und zusätzlich sender und recipient als String zurück
      */
     @Override
     public String toString(){
-        return super.toString() + " " + getSender() + " " + getRecipient();
+        return super.toString() + " " + getSender() + " " + getRecipient() + " gesendeter Betrag: " + calculate();
     }
 
     /**
-     *
-     * @return
+     * eine Funktion, die aus dem Interface CalculateBill übernommen und geändert wurde
+     * @return gibt den double ergebnis zurück, welches den Wert aus getAmount erhalten hat.
      */
     @Override
     public double calculate() {
@@ -111,9 +112,10 @@ public class Transfer extends Transaction
     }
 
     /**
-     *
-     * @param other
-     * @return gibt zurück, ob es falsch oder richtig ist (true oder false)
+     * Überschriebene equals() aus der Superklasse
+     * @param other erhält ein Objekt um den Inhalt zu vergleichen
+     *                   instanceof Operator prüft, ob es eine Beziehung zu other und Transfer Objekt hat. Andernfalls liefert es false
+     * @return erhält true (Im Falle, wenn der Inhalt der Attribute (this) und der Inhalt des Objekts gleich sind) oder false, wenn sie es nicht sind
      */
     @Override
     public boolean equals(Object other) {
