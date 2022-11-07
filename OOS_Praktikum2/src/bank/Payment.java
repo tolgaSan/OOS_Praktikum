@@ -1,11 +1,7 @@
 package bank;
 
-/**
- *
- *@author Tolga Sanli
- */
+//Die Klasse stellt eine Transaktion dar
 public class Payment extends Transaction
-        implements CalculateBill
 {
     //Attribut incomingInterest ist für eingehende Zahlungen, die verzinst werden
     private double incomingInterest;
@@ -94,7 +90,7 @@ public class Payment extends Transaction
      */
     @Override
     public String toString(){
-        return super.toString() + " " + this.incomingInterest + " " + this.outgoingInterest + " Endbetrag: "  + calculate();
+        return super.toString() + " " + this.incomingInterest + " " + this.outgoingInterest;
     }
     /**
      * prüft, ob getAmount größer 0 oder kleiner 0 ist. (Ob Ein- oder Auszahlung)
@@ -133,11 +129,7 @@ public class Payment extends Transaction
     @Override
     public boolean equals(Object other) {
         if (other instanceof Payment payment) {
-            if ((super.equals(payment)) && (this.incomingInterest == payment.incomingInterest) && (this.outgoingInterest == payment.outgoingInterest)) {
-                return true;
-            } else {
-                return false;
-            }
+            return ((super.equals(payment)) && (this.incomingInterest == payment.incomingInterest) && (this.outgoingInterest == payment.outgoingInterest));
         }else{
             return false;
         }

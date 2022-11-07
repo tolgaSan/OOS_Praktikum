@@ -1,7 +1,6 @@
 package bank;
 //eine Klasse, um einen Transfer zwischen 2 Personen zu tätigen
-public class Transfer extends Transaction
-        implements CalculateBill{
+public class Transfer extends Transaction {
     //privates Attribut sender
     private String sender;
     //privates Attribut Empfänger
@@ -33,7 +32,6 @@ public class Transfer extends Transaction
      */
     public Transfer(String date, double amount, String description, String sender, String recipient){
         super(date, amount, description);
-        setAmount(amount);
         setSender(sender);
         setRecipient(recipient);
     }
@@ -98,7 +96,7 @@ public class Transfer extends Transaction
      */
     @Override
     public String toString(){
-        return super.toString() + " " + getSender() + " " + getRecipient() + " gesendeter Betrag: " + calculate();
+        return super.toString() + " " + getSender() + " " + getRecipient() + " gesendeter Betrag: ";
     }
 
     /**
@@ -120,11 +118,7 @@ public class Transfer extends Transaction
     @Override
     public boolean equals(Object other) {
         if (other instanceof Transfer transfer) {
-            if ((super.equals(transfer)) && (this.sender == transfer.sender) && (this.recipient == transfer.recipient)) {
-                return true;
-            } else {
-                return false;
-            }
+            return ((super.equals(transfer)) && (this.sender == transfer.sender) && (this.recipient == transfer.recipient));
         }else{
             return false;
         }

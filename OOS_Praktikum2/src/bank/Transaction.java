@@ -76,7 +76,7 @@ public abstract class Transaction
      */
     @Override
     public String toString() {
-        return getDate() + " " + getAmount() + " " + getDescription();
+        return getDate() + " " + calculate() + " " + getDescription();
     }
 
     /**
@@ -88,13 +88,10 @@ public abstract class Transaction
     @Override
     public boolean equals(Object other) {
         if (other instanceof Transaction transaction) {
-            if ((this.date == transaction.date) && (this.amount == transaction.amount) && (this.description == transaction.description)) {
-                return true;
-            } else {
-                return false;
-            }
+            return ((this.date == transaction.date) && (this.amount == transaction.amount) && (this.description == transaction.description));
         }else{
             return false;
         }
     }
+
 }
