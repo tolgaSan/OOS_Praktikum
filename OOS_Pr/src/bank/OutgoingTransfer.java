@@ -6,8 +6,8 @@ public class OutgoingTransfer extends Transfer{
     @Override
     public double calculate() {
         double balance = getAmount();
-        balance -= getAmount();
-        return balance;
+        balance += getAmount();
+        return -balance;
     }
 
 }

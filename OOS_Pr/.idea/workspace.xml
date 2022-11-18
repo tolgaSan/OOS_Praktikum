@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="544b6a35-016d-426c-acf0-5d194bcfce28" name="Changes" comment="" />
+    <list default="true" id="46e57a3b-c4b5-4c31-a50b-721ed3eb3d5b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOS_Pr/bank/PrivateBank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOS_Pr/bank/PrivateBank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/OutgoingTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/OutgoingTransfer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +45,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
