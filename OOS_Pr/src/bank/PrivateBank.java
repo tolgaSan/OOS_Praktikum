@@ -26,6 +26,7 @@ public class PrivateBank implements Bank{
 
     public PrivateBank(PrivateBank privateBank) {
         this(privateBank.name, privateBank.incomingInterest, privateBank.outgoingInterest );
+
     }
 
     public String getName() {
@@ -109,10 +110,10 @@ public class PrivateBank implements Bank{
         }
         else
         {
-            if (transaction instanceof Payment p)
+            if (transaction instanceof Payment payment)
             {
-                p.setIncomingInterest(PrivateBank.this.incomingInterest);
-                p.setOutgoingInterest(PrivateBank.this.outgoingInterest);
+                payment.setIncomingInterest(PrivateBank.this.incomingInterest);
+                payment.setOutgoingInterest(PrivateBank.this.outgoingInterest);
                 List <Transaction> transactionsList = new ArrayList<>(accountsToTransaction.get(account));
                 transactionsList.add(transaction);
                 accountsToTransaction.put(account,transactionsList);
@@ -139,6 +140,10 @@ public class PrivateBank implements Bank{
         }
         else
         {
+            if(transaction instanceof Payment payment){
+                payment.setIncomingInterest(PrivateBank.this.incomingInterest);
+                payment.setOutgoingInterest(PrivateBank.this.outgoingInterest);
+            }
             List <Transaction> transactionsList = new ArrayList<>(accountsToTransaction.get(account));
             transactionsList.remove(transaction);
             accountsToTransaction.put(account,transactionsList);
