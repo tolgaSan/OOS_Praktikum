@@ -1,30 +1,24 @@
 package bank;
 
-import bank.exceptions.AccountAlreadyExistsException;
-import bank.exceptions.AccountDoesNotExistException;
-import bank.exceptions.TransactionAttributeException;
-import bank.exceptions.TransactionDoesNotExistException;
-import bank.exceptions.TransactionAlreadyExistException;
+import bank.exceptions.*;
 
-import java.sql.Array;
 import java.util.*;
-import java.util.HashMap;
 
 
-public class PrivateBank implements Bank{
+public class PrivateBankAlt implements Bank{
 
     private String name;
     private double incomingInterest;
     private double outgoingInterest;
     public Map<String, List<Transaction>> accountsToTransaction = new HashMap<>();
 
-    public PrivateBank(String name, double incomingInterest, double outgoingInterest) {
+    public PrivateBankAlt(String name, double incomingInterest, double outgoingInterest) {
         setName(name);
         setIncomingInterest(incomingInterest);
         setOutgoingInterest(outgoingInterest);
     }
 
-    public PrivateBank(PrivateBank privateBank) {
+    public PrivateBankAlt(PrivateBankAlt privateBank) {
         this(privateBank.name, privateBank.incomingInterest, privateBank.outgoingInterest );
 
     }
@@ -85,8 +79,8 @@ public class PrivateBank implements Bank{
         else
         {
             if(transactions instanceof Payment payment){
-                payment.setIncomingInterest(PrivateBank.this.incomingInterest);
-                payment.setOutgoingInterest(PrivateBank.this.outgoingInterest);
+                payment.setIncomingInterest(PrivateBankAlt.this.incomingInterest);
+                payment.setOutgoingInterest(PrivateBankAlt.this.outgoingInterest);
             }
             accountsToTransaction.put(account,transactions);
             System.out.println("Account mit Liste von Transaktionen erstellt!");
@@ -112,8 +106,8 @@ public class PrivateBank implements Bank{
         {
             if (transaction instanceof Payment payment)
             {
-                payment.setIncomingInterest(PrivateBank.this.incomingInterest);
-                payment.setOutgoingInterest(PrivateBank.this.outgoingInterest);
+                payment.setIncomingInterest(PrivateBankAlt.this.incomingInterest);
+                payment.setOutgoingInterest(PrivateBankAlt.this.outgoingInterest);
                 List <Transaction> transactionsList = new ArrayList<>(accountsToTransaction.get(account));
                 transactionsList.add(transaction);
                 accountsToTransaction.put(account,transactionsList);
@@ -141,8 +135,8 @@ public class PrivateBank implements Bank{
         else
         {
             if(transaction instanceof Payment payment){
-                payment.setIncomingInterest(PrivateBank.this.incomingInterest);
-                payment.setOutgoingInterest(PrivateBank.this.outgoingInterest);
+                payment.setIncomingInterest(PrivateBankAlt.this.incomingInterest);
+                payment.setOutgoingInterest(PrivateBankAlt.this.outgoingInterest);
             }
             List <Transaction> transactionsList = new ArrayList<>(accountsToTransaction.get(account));
             transactionsList.remove(transaction);
@@ -157,7 +151,11 @@ public class PrivateBank implements Bank{
         for(Transaction transaction : accountsToTransaction.get(account)){
             accountBalance += transaction.calculate();
         }
-        
+        /*if(!(accountsToTransaction.get(account).isEmpty())){
+
+
+            accountBalance += transaction.calculate();
+        }*/
         return accountBalance;
     }
 
@@ -203,15 +201,12 @@ public class PrivateBank implements Bank{
 
     @Override
     public String toString() {
-        return "Name " + getName() + " " + 
-                "Eingang Zins " + getIncomingInterest() + " "  +
-                "Ausgang Zins " + getOutgoingInterest() + " " +
-                "Account " + accountsToTransaction;
+        return getName() + " " +  getIncomingInterest() + " " + getOutgoingInterest() + " " + accountsToTransaction;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof PrivateBank privateBank) {
+        if (other instanceof PrivateBankAlt privateBank) {
             return ((this.name == privateBank.name)
                     && (this.incomingInterest == privateBank.incomingInterest)
                     && (this.outgoingInterest == privateBank.outgoingInterest)

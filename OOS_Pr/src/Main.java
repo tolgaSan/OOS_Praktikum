@@ -42,8 +42,7 @@ public class Main
         System.out.println(calcu0.equals(calcu0copy));
 
          */
-
-      /*  PrivateBank privateBank = new PrivateBank("Bank", 0.3, 0.2);
+        /*  PrivateBank privateBank = new PrivateBank("Bank", 0.3, 0.2);
 
             try
             {
@@ -56,7 +55,7 @@ public class Main
             }
 
        */
-/*
+        /*
         PrivateBank p = new PrivateBank("abc", 1,1);
 
         Transaction tran = new Transfer("nameTran", 1000, "beschreibung");
