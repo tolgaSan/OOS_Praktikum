@@ -1,4 +1,6 @@
 package bank;
+
+import bank.exceptions.*;
 //eine Klasse, um einen Transfer zwischen 2 Personen zu tätigen
 public class Transfer extends Transaction
 {
@@ -18,7 +20,7 @@ public class Transfer extends Transaction
      * @param amount Attribut, dass Betrag angibt, allerdings aus der Superklasse übernommen
      * @param description Attribut, dass Beschreibung angibt, allerdings aus der Superklasse übernommen
      */
-    public Transfer(String date, double amount, String description){
+    public Transfer(String date, double amount, String description) throws AttributeException {
         super(date, amount, description);
     }
 
@@ -31,7 +33,7 @@ public class Transfer extends Transaction
      * @param sender Attribut Sender wird gesettet
      * @param recipient Attribut Empfänger wird gesettet
      */
-    public Transfer(String date, double amount, String description, String sender, String recipient){
+    public Transfer(String date, double amount, String description, String sender, String recipient) throws AttributeException {
         super(date, amount, description);
         setSender(sender);
         setRecipient(recipient);
@@ -41,7 +43,7 @@ public class Transfer extends Transaction
      *Copy-Konstruktor, der identisch mit dem normalen Konstruktor ist
      * @param transfer wird an den Copy-Konstruktor gegeben. Somit übernimmt der CopyKonstruktor die Attribute(den Objekt)
      */
-    public Transfer(Transfer transfer){
+    public Transfer(Transfer transfer) throws AttributeException {
         this(transfer.date, transfer.amount, transfer.description, transfer.sender, transfer.recipient);
     }
 
@@ -49,9 +51,9 @@ public class Transfer extends Transaction
      * Setter für amount, wobei es programmatisch überprüft wird, ob amount größergleich 0 ist. (größer macht mehr Sinn?)
      * @param amount Settet das Attribut amount(Betrag)
      */
-    public void setAmount(double amount){
+    public void setAmount(double amount) throws AttributeException {
         if(amount <= 0){
-            System.out.println("Dein Betrag ist negativ.");
+            throw new AttributeException("Betrag muss höher als 0");
         }else{
             calculate();
             this.amount = amount;
@@ -106,8 +108,8 @@ public class Transfer extends Transaction
      */
     @Override
     public double calculate() {
-        double ergebnis = getAmount();
-        return ergebnis;
+
+        return amount;
     }
 
     /**

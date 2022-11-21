@@ -1,5 +1,10 @@
 package bank;
 
+
+import bank.exceptions.AttributeException;
+import bank.exceptions.IncomingInterestException;
+import bank.exceptions.OutgoingInterestException;
+
 /**
  *
  *@author Tolga Sanli
@@ -23,7 +28,7 @@ public class Payment extends Transaction
      * @param amount Attribut, dass Betrag angibt, allerdings aus der Superklasse übernommen
      * @param description Attribut, dass Beschreibung angibt, allerdings aus der Superklasse übernommen
      */
-    public Payment(String date, double amount, String description){
+    public Payment(String date, double amount, String description) throws AttributeException {
         super(date, amount, description);
     }
 
@@ -35,7 +40,7 @@ public class Payment extends Transaction
      * @param incomingInterest Attribut incomingInterest wird gesettet (zusätzlich beim setten programmatisch überprüft, ob die Eingabe richtig ist)
      * @param outgoingInterest Attribut outgoingInterest wird gesettet (zusätzlich beim setten programmatisch überprüft, ob die Eingabe richtig ist)
      */
-    public Payment(String date, double amount, String description ,double incomingInterest, double outgoingInterest){
+    public Payment(String date, double amount, String description ,double incomingInterest, double outgoingInterest) throws AttributeException, IncomingInterestException, OutgoingInterestException {
         super(date, amount, description);
         setIncomingInterest(incomingInterest);
         setOutgoingInterest(outgoingInterest);
@@ -45,7 +50,7 @@ public class Payment extends Transaction
      * Copy-Konstruktor, der identisch mit dem normalen Konstruktor ist
      * @param payment wird an den Copy-Konstruktor gegeben. Somit übernimmt der CopyKonstruktor die Attribute(den Objekt)
      */
-    public Payment(Payment payment){
+    public Payment(Payment payment) throws AttributeException, IncomingInterestException, OutgoingInterestException {
         this(payment.date, payment.amount, payment.description, payment.incomingInterest, payment.outgoingInterest);
     }
 
@@ -53,19 +58,19 @@ public class Payment extends Transaction
      * Getter für incomingInterest
      * @return gibt incomingInterest zurück
      */
-    public double getIncomingInterest(){
+    public double getIncomingInterest() {
         return incomingInterest;
     }
     /**
      * settet IncomingInterest. Hierbei wird überprüft, ob IncomingInterest zwischen 0 und 1 liegt
      * @param incomingInterest wird geprüft, ob das Parameter zwischen 0 und 1 liegt. Wenn ja, dann setten, falls nein, gebe eine Warnung aus.
      */
-    public void setIncomingInterest(double incomingInterest){
+    public void setIncomingInterest(double incomingInterest) throws IncomingInterestException {
         calculate();
         if(incomingInterest >= 0 && incomingInterest <= 1){
             this.incomingInterest = incomingInterest;
         }else{
-            System.out.println("Die Eingabe ist nicht korrekt.");
+            throw new IncomingInterestException("Gebührbetrag kann nur von 0 bis 1 sein");
         }
     }
     /**
@@ -79,11 +84,11 @@ public class Payment extends Transaction
      * settet outgoingInterest. Hierbei wird überprüft, ob outgoingInterest zwischen 0 und 1 liegt
      * @param outgoingInterest wird geprüft, ob das Parameter zwischen 0 und 1 liegt. Wenn ja, dann setten, falls nein, gebe eine Warnung aus.
      */
-    public void setOutgoingInterest(double outgoingInterest){
+    public void setOutgoingInterest(double outgoingInterest) throws OutgoingInterestException {
         if(outgoingInterest >= 0 && outgoingInterest <= 1){
             this.outgoingInterest = outgoingInterest;
         }else{
-            System.out.println("Die Eingabe ist nicht korrekt.");
+            throw new OutgoingInterestException("Gebührbetrag kann nur von 0 bis 1 sein");
         }
     }
 

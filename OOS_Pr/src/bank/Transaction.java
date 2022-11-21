@@ -1,4 +1,8 @@
 package bank;
+
+
+import bank.exceptions.AttributeException;
+
 //Klasse Transaction stellt eine Transaktion dar und steht als Oberklasse der Klasse Transfer und Payment
 public abstract class Transaction
     implements CalculateBill {
@@ -19,7 +23,7 @@ public abstract class Transaction
      * @param amount Attribut, dass den Betrag ausgibt
      * @param description Attribut, dass Beschreibung bzw. den Verwendungszweck angibt
      */
-    public Transaction(String date, double amount, String description) {
+    public Transaction(String date, double amount, String description) throws AttributeException {
         setDate(date);
         setAmount(amount);
         setDescription(description);
@@ -65,8 +69,12 @@ public abstract class Transaction
     /**
      * @param amount settet den Betrag
      */
-    public void setAmount(double amount) {
+    public void setAmount(double amount) throws AttributeException {
         this.amount = amount;
+    }
+
+    public double calculate(){
+        return amount;
     }
 
     /**

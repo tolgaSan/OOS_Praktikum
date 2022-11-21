@@ -1,7 +1,4 @@
-import bank.Payment;
-import bank.PrivateBank;
-import bank.Transaction;
-import bank.Transfer;
+import bank.*;
 import bank.exceptions.*;
 
 import java.sql.SQLOutput;
@@ -10,98 +7,24 @@ import java.util.List;
 //Klasse Main, um Systemausgabe, testings o.ä. durchzuführen
 public class Main
 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException {
 
-        /*ransfer tra = new Transfer("02.05.", 30, "Transfer", "sender", "empfänger");
-        Transfer tracopy = new Transfer(tra);
-        System.out.println(tra.toString());
+        Payment pay1 = new Payment("01.01.", 200, "Zahlung", 0, 0);
+        Payment pay2 = new Payment("01.01.", 6000, "Lohn");
+        //Variante 1
+        OutgoingTransfer out2 = new OutgoingTransfer("02.01.", 200, "Ich sende das raus");
+        Transfer outg1 = new Transfer(out2);
+        //Variante 2
+        Transfer tran1 = new Transfer("02.01.", 20, "Transfer", "Tolga", "Faik");
+        Transfer tran2 = new Transfer("03.01.", 20, "Transfer", "Faik", "Tolga");
+        Transfer tran3 = new Transfer("03.01.", 20, "Transfer", "Tolga", "");
 
-        System.out.println(tra.equals(tracopy));
 
-        tra.setAmount(500);
-
-        System.out.println(tra.equals(tracopy));
-
-        Transfer trans1 = new Transfer("05.05.", 50, "Nescjreobuing", "sender", "emoffmsdf");
-        System.out.println(trans1.toString());
-
-        Payment calcu0 = new Payment("08.05", -500, "Auszahlung", 0.05, 0.1);
-        Payment calcu0copy = new Payment(calcu0);
-        System.out.println(calcu0.toString());
-
-        Payment calcu1 = new Payment("09.05", 100, "Einzahlung", 0.05, 0.1);
-        System.out.println(calcu1.toString());
-
-        Payment calcu2 = new Payment("10.05", 0, "nullbetragstest", 0.05, 0.1);
-        System.out.println(calcu2.toString());
-
-        System.out.println(calcu0.equals(calcu0copy));
-        calcu0.setAmount(30);
-        calcu0.setIncomingInterest(0.9);
-        System.out.println(calcu0);
-        System.out.println(calcu0.equals(calcu0copy));
-
-         */
-        /*  PrivateBank privateBank = new PrivateBank("Bank", 0.3, 0.2);
-
-            try
-            {
-                PrivateBank privateBank1 = new PrivateBank("Bank", 0.3, 0.2);
-                privateBank.createAccount("abc");
-            }
-            catch (AccountAlreadyExistsException e)
-            {
-
-            }
-
-       */
-        /*
-        PrivateBank p = new PrivateBank("abc", 1,1);
-
-        Transaction tran = new Transfer("nameTran", 1000, "beschreibung");
-        Transaction tran2 = new Transfer("nameTran2", 3000, "beschreibung2");
-        Transaction tran3 = new Transfer("nameTran3", 1600, "beschreibung3");
-        Transaction tran4 = new Transfer("nameTran4", 2100, "beschreibung4");
-        Transaction tran5 = new Transfer("nameTran5", 1500, "beschreibung5");
-
-        PrivateBank accountOhneTranktionen = new PrivateBank("accountOhneTr", 0, 0);
-        try{
-            accountOhneTranktionen.createAccount("accountTest");
-        }catch(AccountAlreadyExistsException e){
-            System.out.println(e);
-        }
-
-        try
-        {
-            p.createAccount("abc", List.of(new Transfer("2002.12.2",1000,"ddfdsf")));
-        }
-        catch (AccountAlreadyExistsException | TransactionAlreadyExistException | TransactionAttributeException e)
-        {
-            System.out.println(e);
-        }
-
-        try {
-            p.removeTransaction("abc", new Transfer("2002.12.2",1000,"ddfdsf"));
-        }
-        catch (AccountDoesNotExistException | TransactionDoesNotExistException e)
-        {
-            System.out.println(e);
-        }
-        try{
-            p.createAccount("asd");
-        } catch (AccountAlreadyExistsException e) {
-            System.out.println(e);
-        }
+        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01);
+        PrivateBankAlt altBank = new PrivateBankAlt("Sparkasse", 0.01, 0.02);
 
         try{
-            accountOhneTranktionen.addTransaction("accountTest", tran);
-        }catch (TransactionAttributeException | TransactionAlreadyExistException | AccountDoesNotExistException e){
-            System.out.println(e);
-        }
-
-        PrivateBank accountMitTrans = new PrivateBank(" AccountTest4 ", 0.5, 0.5);
-        try{
-            accountMitTrans.createAccount(" AccountTest5 ", List.of());
+           altBank.createAccount("Tolga", List.of());
         } catch (TransactionAlreadyExistException e) {
             throw new RuntimeException(e);
         } catch (AccountAlreadyExistsException e) {
@@ -109,82 +32,134 @@ public class Main
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            accountMitTrans.addTransaction(" AccountTest5 ", tran);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            accountMitTrans.addTransaction(" AccountTest5 ", tran2);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            accountMitTrans.addTransaction(" AccountTest5 ", tran3);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            accountMitTrans.addTransaction(" AccountTest5 ", tran4);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            accountMitTrans.addTransaction(" AccountTest5 ", tran5);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println(accountMitTrans);
-        System.out.println(accountMitTrans.getAccountBalance(" AccountTest5 "));
-        System.out.println(accountMitTrans.getTransactions(" AccountTest5 "));
         try{
-            accountMitTrans.removeTransaction(" AccountTest5 ", tran);
+            altBank.createAccount("Faik", List.of());
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountAlreadyExistsException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            altBank.addTransaction("Tolga", pay1);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            altBank.addTransaction("Tolga", tran1);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            altBank.addTransaction("Faik", tran2);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            altBank.createAccount("AltAccount2", List.of());
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountAlreadyExistsException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            altBank.addTransaction("AltAccount2", tran3);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(altBank.toString());
+        System.out.println(altBank.getAccountBalance("Tolga"));
+        System.out.println(altBank.getAccountBalance("Faik"));
+
+        try{
+            bank.createAccount("LeitersKonto");
+        } catch (AccountAlreadyExistsException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            bank.addTransaction("LeitersKonto", outg1);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            bank.createAccount("Mitarbeiter1", List.of(
+                    new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
+                    new OutgoingTransfer("04.11.", 50, "Wette", "Mitarbeiter1", "Leiterskonto"),
+                    new Payment("10.11.", 1200, "Bonus"),
+                    new IncomingTransfer("30.11.", 300, "Wette", "Leiterskonto", "Mitarbeiter1")
+                    ));
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountAlreadyExistsException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            bank.addTransaction("LeitersKonto", pay2);
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountDoesNotExistException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(bank.toString());
+        System.out.println(bank.getName());
+        System.out.println(bank.getAccountBalance("LeitersKonto"));
+        System.out.println(bank.getAccountBalance("Mitarbeiter1"));
+
+        try{
+            bank.removeTransaction("Mitarbeiter1", new OutgoingTransfer("04.11.", 50, "Wette", "Mitarbeiter1", "Leiterskonto"));
         } catch (AccountDoesNotExistException e) {
             throw new RuntimeException(e);
         } catch (TransactionDoesNotExistException e) {
             throw new RuntimeException(e);
         }
+        System.out.println(bank.toString());
+        System.out.println(bank.getTransactionsSorted("Mitarbeiter1", true));
+        System.out.println(bank.getTransactionsSorted("Mitarbeiter1", false));
 
-        System.out.println(accountMitTrans);
-        System.out.println(accountMitTrans.getAccountBalance(" AccountTest5 "));
-        System.out.println(accountMitTrans.getTransactions(" AccountTest5 "));
-        System.out.println(accountMitTrans.getTransactionsSorted(" AccountTest5 ", true));
-        System.out.println(accountMitTrans.getTransactionsSorted(" AccountTest5 ", false));
-        System.out.println(accountMitTrans.getTransactionsByType(" AccountTest5 ", true));
-*/
+        //getTransactionByType testen = nur positive oder negative Beträge ausgeben
 
-        Payment payT1 = new Payment("Pay1", 1000, "beschreibung" );
-        Payment payT2 = new Payment("Pay2", 3000, "beschreibung2");
-        Payment payT3 = new Payment("Pay3", -1600, "beschreibung3");
-        Payment payT4 = new Payment("Pay4", 2100, "beschreibung4");
-        Payment payT5 = new Payment("Pay5", -1500, "beschreibung5");
+        Payment payPos1 = new Payment("12.12.", 2000, "ps");
+        Payment payPos2 = new Payment("12.12.", 3000, "ps");
+        Payment payNeg1 = new Payment("12.12.", -2000, "ps");
+        Payment payNeg2 = new Payment("12.12.", -5200, "ps");
 
-        PrivateBank payAcc = new PrivateBank("PayAccount", 0.05, 0.01);
+        PrivateBank type = new PrivateBank("ByTyp", 0, 0);
 
         try{
-            payAcc.createAccount("Pay Account ", List.of());
+            type.createAccount("beiTyp", List.of(
+                    new Payment(payPos1),
+                    new Payment(payPos2),
+                    new Payment(payNeg1),
+                    new Payment(payNeg2)
+            ));
         } catch (TransactionAlreadyExistException e) {
             throw new RuntimeException(e);
         } catch (AccountAlreadyExistsException e) {
@@ -192,64 +167,16 @@ public class Main
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(payAcc);
-        try{
-            payAcc.addTransaction("Pay Account ", payT1);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try{
-            payAcc.addTransaction("Pay Account ", payT2);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try{
-            payAcc.addTransaction("Pay Account ", payT3);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try{
-            payAcc.addTransaction("Pay Account ", payT4);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        try{
-            payAcc.addTransaction("Pay Account ", payT5);
-        } catch (TransactionAlreadyExistException e) {
-            throw new RuntimeException(e);
-        } catch (AccountDoesNotExistException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(payAcc);
-        System.out.println(payAcc.getAccountBalance("Pay Account "));
-        System.out.println(payAcc.getTransactions("Pay Account "));
-        System.out.println(payAcc.getTransactionsSorted("Pay Account ", true));
-        System.out.println(payAcc.getTransactionsSorted("Pay Account ", false));
-        System.out.println(payAcc.getTransactionsByType("Pay Account ", true));
-        System.out.println(payAcc.getTransactionsByType("Pay Account ", false));
+        System.out.println(type.getTransactionsByType("beiTyp", true));
+        System.out.println(type.getTransactionsByType("beiTyp", false));
 
-        System.out.println(payAcc.containsTransaction("Pay Account ", payT2));
+        PrivateBank equtest1 = new PrivateBank("test1", 0.0, 0.0);
 
-
-
+        PrivateBank equtest3 = new PrivateBank(equtest1);
+        System.out.println(equtest1.equals(equtest1));
+        System.out.println(equtest1.equals(equtest3));
+        PrivateBank equtest2 = new PrivateBank("test1", 0.1, 0.0);
+        System.out.println(equtest3.equals(equtest2));
     }
 }
 

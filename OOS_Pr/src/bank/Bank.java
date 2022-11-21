@@ -40,7 +40,7 @@ public interface Bank {
      * @throws TransactionAttributeException    if the validation check for certain attributes fail
      */
     void addTransaction(String account, Transaction transaction)
-            throws TransactionAlreadyExistException, AccountDoesNotExistException, TransactionAttributeException;
+            throws TransactionAlreadyExistException, AccountDoesNotExistException, TransactionAttributeException, IncomingInterestException, OutgoingInterestException;
 
     /**
      * Removes a transaction from an account. If the transaction does not exist, an exception is
@@ -52,7 +52,7 @@ public interface Bank {
      * @throws TransactionDoesNotExistException if the transaction cannot be found
      */
     void removeTransaction(String account, Transaction transaction)
-            throws AccountDoesNotExistException, TransactionDoesNotExistException;
+            throws AccountDoesNotExistException, TransactionDoesNotExistException, IncomingInterestException, OutgoingInterestException;
 
     /**
      * Checks whether the specified transaction for a given account exists.
