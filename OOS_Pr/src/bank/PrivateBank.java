@@ -126,7 +126,7 @@ public class PrivateBank implements Bank{
      * @throws TransactionAttributeException throwt exception, wenn Attribut nicht stimmt (Amount fehlerhaft)
      */
     @Override
-    public void createAccount(String account, List<Transaction> transactions) throws AccountAlreadyExistsException, TransactionAlreadyExistException, TransactionAttributeException, AccountDoesNotExistException, OutgoingInterestException, IncomingInterestException {
+    public void createAccount(String account, List<Transaction> transactions) throws AccountAlreadyExistsException, TransactionAlreadyExistException, TransactionAttributeException {
         if (accountsToTransaction.containsKey(account))
         {
             throw new AccountAlreadyExistsException("Account existiert schon");
@@ -139,12 +139,19 @@ public class PrivateBank implements Bank{
         {
             throw new TransactionAttributeException("Attribute fehler");
         }
-
         else
         {
-
+            createAccount(account);
             for(Transaction transaction:transactions){
-                addTransaction(account, transaction);
+                try {
+                    addTransaction(account, transaction);
+                } catch (AccountDoesNotExistException e) {
+                    throw new RuntimeException(e);
+                } catch (IncomingInterestException e) {
+                    throw new RuntimeException(e);
+                } catch (OutgoingInterestException e) {
+                    throw new RuntimeException(e);
+                }
             }
             System.out.println("Account mit Liste von Transaktionen erstellt!");
         }
