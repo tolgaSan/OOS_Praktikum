@@ -175,7 +175,7 @@ public class Main
         PrivateBank equtest3 = new PrivateBank(equtest1);
         System.out.println(equtest1.equals(equtest1));
         System.out.println(equtest1.equals(equtest3));
-        PrivateBank equtest2 = new PrivateBank("test1", 0.1, 0.0);
+        PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0);
         System.out.println(equtest3.equals(equtest2));
     }
 }
