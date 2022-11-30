@@ -1,6 +1,8 @@
 package bank;
 
 import bank.exceptions.*;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public interface Bank {
      * @param account the account to be added
      * @throws AccountAlreadyExistsException if the account already exists
      */
-    void createAccount(String account) throws AccountAlreadyExistsException;
+    void createAccount(String account) throws AccountAlreadyExistsException, IOException;
 
     /**
      * Adds an account (with specified transactions) to the bank.
@@ -28,7 +30,7 @@ public interface Bank {
      * @throws TransactionAttributeException    if the validation check for certain attributes fail
      */
     void createAccount(String account, List<Transaction> transactions)
-            throws AccountAlreadyExistsException, TransactionAlreadyExistException, TransactionAttributeException;
+            throws AccountAlreadyExistsException, TransactionAlreadyExistException, TransactionAttributeException, IOException;
 
     /**
      * Adds a transaction to an already existing account.
@@ -40,7 +42,7 @@ public interface Bank {
      * @throws TransactionAttributeException    if the validation check for certain attributes fail
      */
     void addTransaction(String account, Transaction transaction)
-            throws TransactionAlreadyExistException, AccountDoesNotExistException, TransactionAttributeException, IncomingInterestException, OutgoingInterestException;
+            throws TransactionAlreadyExistException, AccountDoesNotExistException, TransactionAttributeException, IncomingInterestException, OutgoingInterestException, IOException;
 
     /**
      * Removes a transaction from an account. If the transaction does not exist, an exception is
@@ -52,7 +54,7 @@ public interface Bank {
      * @throws TransactionDoesNotExistException if the transaction cannot be found
      */
     void removeTransaction(String account, Transaction transaction)
-            throws AccountDoesNotExistException, TransactionDoesNotExistException, IncomingInterestException, OutgoingInterestException;
+            throws AccountDoesNotExistException, TransactionDoesNotExistException, IncomingInterestException, OutgoingInterestException, IOException;
 
     /**
      * Checks whether the specified transaction for a given account exists.

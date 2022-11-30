@@ -1,13 +1,14 @@
 import bank.*;
 import bank.exceptions.*;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.List;
 
 //Klasse Main, um Systemausgabe, testings o.ä. durchzuführen
 public class Main
 {
-    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException {
+    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException, TransactionAlreadyExistException, AccountAlreadyExistsException, AccountDoesNotExistException, TransactionAttributeException, IOException {
 
         Payment pay1 = new Payment("01.01.", 200, "Zahlung", 0, 0);
         Payment pay2 = new Payment("01.01.", 6000, "Lohn");
@@ -20,7 +21,7 @@ public class Main
         Transfer tran3 = new Transfer("03.01.", 20, "Transfer", "Tolga", "");
 
 
-        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01);
+        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
         PrivateBankAlt altBank = new PrivateBankAlt("Sparkasse", 0.01, 0.02);
 
         try{
@@ -95,6 +96,8 @@ public class Main
             bank.createAccount("LeitersKonto");
         } catch (AccountAlreadyExistsException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         try{
             bank.addTransaction("LeitersKonto", outg1);
@@ -103,6 +106,8 @@ public class Main
         } catch (AccountDoesNotExistException e) {
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try{
@@ -118,6 +123,8 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         try{
             bank.addTransaction("LeitersKonto", pay2);
@@ -126,6 +133,8 @@ public class Main
         } catch (AccountDoesNotExistException e) {
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         System.out.println(bank.toString());
@@ -139,6 +148,8 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionDoesNotExistException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         System.out.println(bank.toString());
         System.out.println(bank.getTransactionsSorted("Mitarbeiter1", true));
@@ -151,7 +162,7 @@ public class Main
         Payment payNeg1 = new Payment("12.12.", -2000, "ps");
         Payment payNeg2 = new Payment("12.12.", -5200, "ps");
 
-        PrivateBank type = new PrivateBank("ByTyp", 0, 0);
+        PrivateBank type = new PrivateBank("ByTyp", 0, 0, "Daten");
 
         try{
             type.createAccount("beiTyp", List.of(
@@ -166,16 +177,18 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         System.out.println(type.getTransactionsByType("beiTyp", true));
         System.out.println(type.getTransactionsByType("beiTyp", false));
 
-        PrivateBank equtest1 = new PrivateBank("test1", 0.0, 0.0);
+        PrivateBank equtest1 = new PrivateBank("test1", 0.0, 0.0, "Daten");
 
         PrivateBank equtest3 = new PrivateBank(equtest1);
         System.out.println(equtest1.equals(equtest1));
         System.out.println(equtest1.equals(equtest3));
-        PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0);
+        PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0, "Daten");
         System.out.println(equtest3.equals(equtest2));
     }
 }

@@ -32,6 +32,8 @@ public class IncomingTransfer extends Transfer{
         super(Date, Amount, Description, Sender, Recipient);
     }
 
+
+
     /**
      * überschriebene Methode calculate
      * @return gibt den errechneten Betrag zurück
@@ -40,6 +42,6 @@ public class IncomingTransfer extends Transfer{
     public double calculate() {
         double balance = getAmount();
 
-        return balance;
+        return (balance);
     }
 }
