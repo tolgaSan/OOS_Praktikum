@@ -1,0 +1,48 @@
+[{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.11.",
+    "amount": 100.0,
+    "description": "beschr."
+  }
+}
+,{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.10",
+    "amount": 500.0,
+    "description": "beschr."
+  }
+}
+,{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.11.",
+    "amount": 1000.0,
+    "description": "beschr."
+  }
+}
+,{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.10",
+    "amount": 300.0,
+    "description": "beschr."
+  }
+}
+,{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.11.",
+    "amount": 400.0,
+    "description": "beschr."
+  }
+}
+,{
+  "CLASSNAME": "IncomingTransfer",
+  "INSTANCE": {
+    "date": "21.10",
+    "amount": 900.0,
+    "description": "beschr."
+  }
+}]
