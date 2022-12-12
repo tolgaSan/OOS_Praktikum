@@ -14,6 +14,7 @@ public class PaymentTest {
     Payment copyPayment = new Payment(payment);
     Payment copyPayment2 = new Payment(payment2);
     Payment paymentOutgoingInterest = new Payment("22.22", -30, "Zahlung",0.01,0.01);
+    Payment paymentZero = new Payment("22",0,"zero");
     public PaymentTest() throws OutgoingInterestException, IncomingInterestException, AttributeException {
     }
 
@@ -63,12 +64,16 @@ public class PaymentTest {
     @DisplayName("Calculate-Methode soll richtig ausgeführt werden")
     public void calculateTest() {
 
+
         assertEquals(30, payment.calculate()); //Kein Interest -> normalerweise von der Klasse PrivateBank übernommen
         assertEquals(29.7, payment2.calculate()); // Test im Falle eines ingoingInterest
         assertEquals(29.7, copyPayment2.calculate());
         assertEquals(-30.3, paymentOutgoingInterest.calculate()); // Test im Falle eines outgoingInterest
+        assertEquals(0.0, paymentZero.calculate());
 
     }
+
+
 
     @Test
     @DisplayName("Equals soll richtig vergleichen")
@@ -76,10 +81,11 @@ public class PaymentTest {
 
         assertEquals(true, payment.equals(copyPayment));
         assertEquals(true, payment2.equals(copyPayment2));
+        assertEquals(false, payment.equals(paymentZero));
 
     }
 
-    @Test
+    @Tests
     @DisplayName("toString soll String richtig ausgeben")
     public void toStringTest(){
 

@@ -12,7 +12,6 @@ public class Transfer extends Transaction
     /**
      *default Konstruktor
      */
-    public Transfer(){}
 
     /**
      * Konstruktor, um 3 Attribute zu konstruktiiren

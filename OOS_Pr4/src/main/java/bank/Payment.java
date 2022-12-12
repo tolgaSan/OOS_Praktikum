@@ -19,8 +19,7 @@ public class Payment extends Transaction
     /**
      *Default Konstruktor
      */
-    public Payment(){
-    }
+
 
     /**
      * Konstruktor, welches Attribute aus der Superklasse übernimmt

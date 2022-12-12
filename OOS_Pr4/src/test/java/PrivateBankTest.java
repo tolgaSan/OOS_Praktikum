@@ -17,14 +17,17 @@ import java.util.List;
 
 
 public class PrivateBankTest {
-    PrivateBank bank = new PrivateBank("UniBank", 0.01, 0.01, "TestBank");
+    private PrivateBank bank;
+    private PrivateBank copyBank;
+
 
     public PrivateBankTest() throws OutgoingInterestException, IncomingInterestException, AttributeException, TransactionAlreadyExistException, AccountAlreadyExistsException, AccountDoesNotExistException, TransactionAttributeException, IOException {
     }
 
     @BeforeEach
     public void initMehtode() throws Exception {
-
+        assertDoesNotThrow(()-> bank = new PrivateBank("UniBank", 0.01, 0.01, "TestBank"));
+        assertDoesNotThrow(()-> copyBank = new PrivateBank(bank));
     }
 
     @AfterEach
@@ -39,8 +42,9 @@ public class PrivateBankTest {
         file.delete();
         file2.delete();
         file3.delete();
-        file4.delete();
+
         file5.delete();
+        file4.delete();
     }
 
     @Test
@@ -51,6 +55,16 @@ public class PrivateBankTest {
         assertEquals(0.01, bank.getIncomingInterest());
         assertEquals(0.01, bank.getOutgoingInterest());
         assertEquals("TestBank", bank.getDirectoryName());
+    }
+
+    @Test
+    @DisplayName("CopyKonstruktor soll richtig konstruieren")
+    public void copyKonstruktorTest(){
+        assertNotNull(copyBank);
+        assertEquals("UniBank", copyBank.getName());
+        assertEquals(0.01, copyBank.getIncomingInterest());
+        assertEquals(0.01, copyBank.getOutgoingInterest());
+        assertEquals("TestBank", copyBank.getDirectoryName());
     }
 
     @Test
@@ -171,7 +185,6 @@ public class PrivateBankTest {
 
         );
         assertEquals(transactions, bank.getTransactionsSorted("CreateTestAccount", true));
-
 
         bank.createAccount("CreateTestAccount2", List.of(
                 new IncomingTransfer("21.110.", 1000, "beschr."),
