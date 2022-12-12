@@ -1,16 +1,14 @@
 import bank.*;
 import bank.exceptions.*;
 
-import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.List;
 
 //Klasse Main, um Systemausgabe, testings o.ä. durchzuführen
 public class Main
 {
-    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException, TransactionAlreadyExistException, AccountAlreadyExistsException, AccountDoesNotExistException, TransactionAttributeException, IOException {
+    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException {
 
-        /*
         Payment pay1 = new Payment("01.01.", 200, "Zahlung", 0, 0);
         Payment pay2 = new Payment("01.01.", 6000, "Lohn");
         //Variante 1
@@ -22,7 +20,7 @@ public class Main
         Transfer tran3 = new Transfer("03.01.", 20, "Transfer", "Tolga", "");
 
 
-        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
+        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01);
         PrivateBankAlt altBank = new PrivateBankAlt("Sparkasse", 0.01, 0.02);
 
         try{
@@ -97,8 +95,6 @@ public class Main
             bank.createAccount("LeitersKonto");
         } catch (AccountAlreadyExistsException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         try{
             bank.addTransaction("LeitersKonto", outg1);
@@ -108,16 +104,11 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         try{
             bank.createAccount("Mitarbeiter1", List.of(
                     new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
                     new OutgoingTransfer("04.11.", 50, "Wette", "Mitarbeiter1", "Leiterskonto"),
-                    new OutgoingTransfer("04.11.", 30, "Wette", "Leiterskonto", "Leiterskonto"),
-                    new OutgoingTransfer("04.11.", 60, "Wette", "Leiterskonto", "Leiterskonto"),
-                    new OutgoingTransfer("04.11.", 80, "Wette", "Leiterskonto", "Leiterskonto"),
                     new Payment("10.11.", 1200, "Bonus"),
                     new IncomingTransfer("30.11.", 300, "Wette", "Leiterskonto", "Mitarbeiter1")
                     ));
@@ -127,8 +118,6 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         try{
             bank.addTransaction("LeitersKonto", pay2);
@@ -137,8 +126,6 @@ public class Main
         } catch (AccountDoesNotExistException e) {
             throw new RuntimeException(e);
         } catch (TransactionAttributeException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         System.out.println(bank.toString());
@@ -152,8 +139,6 @@ public class Main
             throw new RuntimeException(e);
         } catch (TransactionDoesNotExistException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         System.out.println(bank.toString());
         System.out.println(bank.getTransactionsSorted("Mitarbeiter1", true));
@@ -166,44 +151,32 @@ public class Main
         Payment payNeg1 = new Payment("12.12.", -2000, "ps");
         Payment payNeg2 = new Payment("12.12.", -5200, "ps");
 
-        PrivateBank type = new PrivateBank("ByTyp", 0, 0, "Daten");
+        PrivateBank type = new PrivateBank("ByTyp", 0, 0);
 
+        try{
+            type.createAccount("beiTyp", List.of(
+                    new Payment(payPos1),
+                    new Payment(payPos2),
+                    new Payment(payNeg1),
+                    new Payment(payNeg2)
+            ));
+        } catch (TransactionAlreadyExistException e) {
+            throw new RuntimeException(e);
+        } catch (AccountAlreadyExistsException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionAttributeException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(type.getTransactionsByType("beiTyp", true));
+        System.out.println(type.getTransactionsByType("beiTyp", false));
 
-
-        PrivateBank equtest1 = new PrivateBank("test1", 0.0, 0.0, "Daten");
+        PrivateBank equtest1 = new PrivateBank("test1", 0.0, 0.0);
 
         PrivateBank equtest3 = new PrivateBank(equtest1);
         System.out.println(equtest1.equals(equtest1));
         System.out.println(equtest1.equals(equtest3));
-        PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0, "Daten");
+        PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0);
         System.out.println(equtest3.equals(equtest2));
-
-        */
-
-      //  PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
-       // PrivateBank bank2 = new PrivateBank("Unibank2", 0.01, 0.01, "Oke");
-
-        /*bank.createAccount("accountTest", List.of(
-                new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
-                new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
-                new OutgoingTransfer("03.11.", 3000, "Lohn", "Toggo", "Ausland")
-        ));
-
-        bank2.createAccount("accountTest2", List.of(
-                new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
-                new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
-                new OutgoingTransfer("03.11.", 3000, "Lohn", "Toggo", "Ausland")
-        ));*/
-
-        //PrivateBank bankCopy = new PrivateBank(bank);
-
-
-
-
-        //System.out.println(bank);
-
-        //bank.toString();
-
     }
 }
 

@@ -108,6 +108,7 @@ public class Transfer extends Transaction
      */
     @Override
     public double calculate() {
+
         return amount;
     }
 
