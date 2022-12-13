@@ -85,7 +85,7 @@ public class PaymentTest {
 
     }
 
-    @Tests
+    @Test
     @DisplayName("toString soll String richtig ausgeben")
     public void toStringTest(){
 

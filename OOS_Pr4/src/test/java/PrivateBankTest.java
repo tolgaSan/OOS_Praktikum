@@ -248,5 +248,4 @@ public class PrivateBankTest {
         assertTrue(bankCopy.equals(bank));
     }
 
-
 }
