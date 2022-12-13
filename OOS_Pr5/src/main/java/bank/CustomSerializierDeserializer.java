@@ -6,7 +6,7 @@ import bank.exceptions.OutgoingInterestException;
 import com.google.gson.*;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonDeserializer;
-import org.jetbrains.annotations.NotNull;
+
 
 import java.lang.*;
 import java.lang.reflect.Type;
