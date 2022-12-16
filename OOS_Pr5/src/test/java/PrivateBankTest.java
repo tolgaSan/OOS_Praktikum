@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,7 +37,7 @@ public class PrivateBankTest {
         File file = new File("TestBank/createAccountTest.json");
         File file2 = new File("TestBank/createTestAccount.json");
         File file3 = new File("TestBank/createTestAccount2.json");
-        File file4 = new File("TestBank/CreateTestAccountTest.json");
+        File file4 = new File("TestBanke/CreateTestAccountTest.json");
         File file5 = new File("TestBank/CreateTestAccountMitTransaktionen.json");
 
         file.delete();
@@ -248,5 +249,36 @@ public class PrivateBankTest {
         assertTrue(bankCopy.equals(bank));
     }
 
+    @Test
+    @DisplayName("deleteAccount soll korrekt gelöscht werden")
+    public void deleteAccountTest() throws OutgoingInterestException, IncomingInterestException, AttributeException, TransactionAlreadyExistException, AccountAlreadyExistsException, TransactionAttributeException, IOException {
+        bank.createAccount("Tolga", List.of(
+                new Payment("21.11.", 100, "beschr.", 0.01, 0.01),
+                new OutgoingTransfer("21.10", 500, "beschr.")
+        ));
+        assertDoesNotThrow(() -> bank.deleteAccount("Tolga"));
+    }
+    @Test
+    @DisplayName("getAllAccountsTest soll alle accounts ausgeben")
+    public void getAllAccountsTest() throws AccountAlreadyExistsException, IOException {
+        bank.createAccount("Tolga");
+        bank.createAccount("Faik");
+        bank.createAccount("Geheim");
+
+        List<String> accounts = new ArrayList<>();
+        accounts.add("Geheim");
+        accounts.add("Tolga");
+        accounts.add("Faik");
+
+        assertEquals(accounts, bank.getAllAccounts());
+
+        File file1 = new File("TestBank/Faik.json");
+        File file2 = new File("TestBank/Geheim.json");
+        File file3 = new File("TestBank/Tolga.json");
+
+        file1.delete();
+        file2.delete();
+        file3.delete();
+    }
 
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="mainviewController">
+
+    <TextField fx:id="textField" />
+    <Button fx:id="button1" text="Button 1" onAction="#handleButton1Action" />
+    <Button fx:id="button2" text="Button 2" onAction="#handleButton2Action" />
+
+</VBox>

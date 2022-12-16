@@ -2,6 +2,7 @@ C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\Transa
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\AccountDoesNotExistException.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\CustomSerializierDeserializer.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\TransactionDoesNotExistException.java
+C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\MainviewController.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\OutgoingInterestException.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\AccountAlreadyExistsException.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\AttributeException.java
@@ -11,8 +12,8 @@ C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\Incomi
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\PrivateBank.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\TransactionAlreadyExistException.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\OutgoingTransfer.java
-C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\PrivateBankAlt.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\exceptions\TransactionAttributeException.java
+C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\AccountviewController.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\Transfer.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\Payment.java
 C:\Users\TolgaSanli\IdeaProjects\OOS_Praktikum\OOS_Pr5\src\main\java\bank\Bank.java

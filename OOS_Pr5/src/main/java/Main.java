@@ -1,15 +1,24 @@
-import bank.*;
 import bank.exceptions.*;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.List;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.fxml.FXML;
+
 
 //Klasse Main, um Systemausgabe, testings o.ä. durchzuführen
-public class Main
+public class Main extends Application
 {
-    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException, TransactionAlreadyExistException, AccountAlreadyExistsException, AccountDoesNotExistException, TransactionAttributeException, IOException {
 
+
+    public static void main(String[] args) throws AttributeException, OutgoingInterestException, IncomingInterestException, TransactionAlreadyExistException, AccountAlreadyExistsException, AccountDoesNotExistException, TransactionAttributeException, IOException {
+        launch(args);
+
+        /*
         /*
         Payment pay1 = new Payment("01.01.", 200, "Zahlung", 0, 0);
         Payment pay2 = new Payment("01.01.", 6000, "Lohn");
@@ -179,11 +188,10 @@ public class Main
         System.out.println(equtest3.equals(equtest2));
 
         */
-
-      //  PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
-       // PrivateBank bank2 = new PrivateBank("Unibank2", 0.01, 0.01, "Oke");
-
-        /*bank.createAccount("accountTest", List.of(
+        //PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
+        //PrivateBank bank2 = new PrivateBank("Unibank2", 0.01, 0.01, "Oke");
+        /*
+        bank.createAccount("accountTest", List.of(
                 new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
                 new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
                 new OutgoingTransfer("03.11.", 3000, "Lohn", "Toggo", "Ausland")
@@ -194,15 +202,20 @@ public class Main
                 new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
                 new OutgoingTransfer("03.11.", 3000, "Lohn", "Toggo", "Ausland")
         ));*/
+        /*PrivateBank bankCopy = new PrivateBank(bank);
 
-        //PrivateBank bankCopy = new PrivateBank(bank);
+        System.out.println(bank);
+        bank.deleteAccount("accountTest");
+
+        bank.toString();*/
 
 
 
+    }
 
-        //System.out.println(bank);
 
-        //bank.toString();
+    @Override
+    public void start(Stage stage) throws Exception {
 
     }
 }
