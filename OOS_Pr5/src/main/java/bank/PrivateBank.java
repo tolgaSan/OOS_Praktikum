@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.HashMap;
@@ -211,6 +212,22 @@ public class PrivateBank implements Bank{
     }
 
     /**
+     * Eine Funktion, um ein vorhandenes Account zu löschen
+     * @param account bestehendes Account, das zu löschen ist
+     * @throws AccountDoesNotExistException throwt Exception, wenn Account nicht existiert
+     * @throws IOException throwt Exception, wenn kp
+     */
+    public void deleteAccount(String account) throws AccountDoesNotExistException, IOException{
+        if(!accountsToTransaction.containsKey(account)){
+            throw new AccountDoesNotExistException("Account " + account +"existiert nicht!");
+        }else{
+            accountsToTransaction.remove(account);
+            Path file = Path.of("/Users/TolgaSanli/IdeaProjects/OOS_Praktikum/OOS_Pr5/" + this.directoryName+ "/"+account+".json");
+            Files.deleteIfExists(file);
+        }
+    }
+
+    /**
      * Eine Methode, um eine Transaktion einer vorhandenen Key in Hashmap hinzuzufügen
      * @param account     the account to which the transaction is added
      * @param transaction the transaction which should be added to the specified account
@@ -286,6 +303,17 @@ public class PrivateBank implements Bank{
 
         }
 
+    }
+
+    /**
+     * Eine Funktion, um alle accounts auszugeben
+     * @return eine Liste(Array) mit accounts
+     * keySet() returnt eine Mapped liste
+     */
+    public List<String> getAllAccounts(){
+        /*List<String> accounts = null;
+        for(Transaction transaction: accountsToTransaction.get(accounts))*/
+        return new ArrayList<String>(accountsToTransaction.keySet());
     }
 
     /**
