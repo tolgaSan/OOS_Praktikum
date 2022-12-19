@@ -30,5 +30,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:19" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:19" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:19" level="project" />
+    <orderEntry type="library" name="javafx.controls" level="application" />
   </component>
 </module>
