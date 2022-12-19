@@ -1,4 +1,4 @@
-import bank.exceptions.*;
+package com.oos.OOS_PR5_neu;/*import bank.exceptions.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -176,7 +177,7 @@ public class Main extends Application
         System.out.println(bank.getTransactionsSorted("Mitarbeiter1", true));
         System.out.println(bank.getTransactionsSorted("Mitarbeiter1", false));
 
-        //getTransactionByType testen = nur positive oder negative Beträge ausgeben
+        getTransactionByType testen = nur positive oder negative Beträge ausgeben
 
         Payment payPos1 = new Payment("12.12.", 2000, "ps");
         Payment payPos2 = new Payment("12.12.", 3000, "ps");
@@ -195,10 +196,10 @@ public class Main extends Application
         PrivateBank equtest2 = new PrivateBank("test1", 0.01, 0.0, "Daten");
         System.out.println(equtest3.equals(equtest2));
 
-        */
-        //PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
-        //PrivateBank bank2 = new PrivateBank("Unibank2", 0.01, 0.01, "Oke");
-        /*
+
+        PrivateBank bank = new PrivateBank("Unibank", 0.01, 0.01, "Daten");
+        PrivateBank bank2 = new PrivateBank("Unibank2", 0.01, 0.01, "Oke");
+
         bank.createAccount("accountTest", List.of(
                 new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
                 new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
@@ -209,23 +210,32 @@ public class Main extends Application
                 new Payment("03.11.", 3000, "Lohn", 0.01, 0.01),
                 new IncomingTransfer("03.11.", 3000, "Lohn", "Toggo", "faek"),
                 new OutgoingTransfer("03.11.", 3000, "Lohn", "Toggo", "Ausland")
-        ));*/
-        /*PrivateBank bankCopy = new PrivateBank(bank);
+        )
+        PrivateBank bankCopy = new PrivateBank(bank);
 
         System.out.println(bank);
         bank.deleteAccount("accountTest");
 
-        bank.toString();*/
+        bank.toString();
 
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         stage.setTitle("Die Bank");
         button = new Button("Klick mich!");
-        
+        button.setOnAction(new EventHandler<ActionEvent>() {
+                               @Override
+                               public void handle(ActionEvent actionEvent) {
+                                   System.out.println("Hello World!");
+                               }
+                           }
+        );
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
+
+
 
         Scene scene = new Scene(layout, 250, 250);
         stage.setScene(scene);
@@ -233,9 +243,29 @@ public class Main extends Application
     }
 }
 
+*/
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(root.getScene());
+        primaryStage.show();
+    }
 
 
-
+}
 
 
 

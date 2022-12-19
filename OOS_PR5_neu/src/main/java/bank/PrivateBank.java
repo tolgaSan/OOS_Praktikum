@@ -58,7 +58,7 @@ public class PrivateBank implements Bank{
         setOutgoingInterest(outgoingInterest);
         setDirectoryName(directoryName);
 
-        File f = new File("/Users/TolgaSanli/IdeaProjects/OOS_PR5/" + directoryName);
+        File f = new File("/Users/tolgasanli/IdeaProjects/OOS_Praktikum/OOS_PR5_Neu/" + directoryName);
         if(!f.exists()){
             //  C:\Users\TolgaSanli\IdeaProjects\OOS_PR5\
             if (f.mkdir() == true) {
@@ -222,7 +222,7 @@ public class PrivateBank implements Bank{
             throw new AccountDoesNotExistException("Account " + account +"existiert nicht!");
         }else{
             accountsToTransaction.remove(account);
-            Path file = Path.of("/Users/TolgaSanli/IdeaProjects/OOS_PR5/" + this.directoryName+ "/"+account+".json");
+            Path file = Path.of("/Users/tolgasanli/IdeaProjects/OOS_Praktikum/OOS_PR5_Neu/" + this.directoryName+ "/"+account+".json");
             Files.deleteIfExists(file);
         }
     }
@@ -451,7 +451,7 @@ public class PrivateBank implements Bank{
      * @throws Exception
      */
     public void readAccounts() throws IOException, AccountAlreadyExistsException, TransactionAlreadyExistException, AccountDoesNotExistException, TransactionAttributeException, Exception {
-        File file = new File("/Users/TolgaSanli/IdeaProjects/OOS_PR5/" + this.directoryName);
+        File file = new File("/Users/tolgasanli/IdeaProjects/OOS_Praktikum/OOS_PR5_Neu/" + this.directoryName);
         File[] accountList = Objects.requireNonNull(file.listFiles());
         for(File account: accountList){
             String accountName = account.getName().replace(".json", "");
@@ -488,7 +488,7 @@ public class PrivateBank implements Bank{
      * @param account der zu übergebende Account aus spezifischen Klassen
      */
     private void writeAccount(String account) {
-        try (FileWriter file = new FileWriter("/Users/TolgaSanli/IdeaProjects/OOS_PR5/" + this.directoryName +"/" + account + ".json")) {
+        try (FileWriter file = new FileWriter("/Users/tolgasanli/IdeaProjects/OOS_Praktikum/OOS_PR5_Neu/" + this.directoryName +"/" + account + ".json")) {
             file.write("[");
             for (Transaction transaction : accountsToTransaction.get(account)) {
                 Gson gson = new GsonBuilder()
