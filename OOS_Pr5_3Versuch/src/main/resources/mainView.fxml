@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+    <ListView fx:id="accountListView" layoutX="60.0" layoutY="92.0" prefHeight="235.0" prefWidth="500.0" />
+    <Text layoutX="50.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts" textAlignment="LEFT" wrappingWidth="457.0">
+        <font>
+            <Font size="30.0" />
+        </font>
+    </Text>
+    <StackPane layoutX="1.0" layoutY="327.0" prefHeight="59.0" prefWidth="450.0">
+        <Text fx:id="text" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+    </StackPane>
+    <Button fx:id="addButton" layoutX="221.0" layoutY="350.0" mnemonicParsing="false" text="Account hinzufügen" textAlignment="CENTER">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+</AnchorPane>

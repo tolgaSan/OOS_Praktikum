@@ -8,13 +8,15 @@ bank\exceptions\TransactionDoesNotExistException.class
 Main.class
 bank\exceptions\IncomingInterestException.class
 bank\Transfer.class
+MainController.class
 bank\Payment.class
 bank\exceptions\AccountDoesNotExistException.class
+AccountController.class
+Account.class
 bank\CustomSerializierDeserializer.class
 bank\exceptions\TransactionAttributeException.class
 bank\IncomingTransfer.class
 bank\PrivateBankAlt.class
 bank\exceptions\AccountAlreadyExistsException.class
-Controller.class
 bank\exceptions\OutgoingInterestException.class
 bank\PrivateBank.class

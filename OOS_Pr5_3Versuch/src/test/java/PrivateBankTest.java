@@ -68,17 +68,17 @@ public class PrivateBankTest {
         assertEquals("TestBank", copyBank.getDirectoryName());
     }
 
-    @Test
+
     @DisplayName("createAccountTest soll Account richtig erstellen")
-    public void createAccountTest(){
-
-
-        assertDoesNotThrow(() -> bank.createAccount("createAccountTest"));
-        assertThrows(AccountAlreadyExistsException.class, () -> bank.createAccount("createAccountTest"));
+    @ParameterizedTest
+    @ValueSource(strings = {"Tolga", "Faik", "Geheim"})
+    public void createAccountTest(String account){
+        assertDoesNotThrow(() -> bank.createAccount(account));
+        assertThrows(AccountAlreadyExistsException.class, () -> bank.createAccount(account));
         assertNotNull(bank.getName());
         assertNotNull(bank.getDirectoryName());
 
-
+        assertDoesNotThrow(() -> bank.deleteAccount(account));
 
     }
 
@@ -258,34 +258,40 @@ public class PrivateBankTest {
         ));
         assertDoesNotThrow(() -> bank.deleteAccount("Tolga"));
     }
-    @Test
+    @ParameterizedTest
     @DisplayName("getAllAccountsTest soll alle accounts ausgeben")
-    public void getAllAccountsTest() throws AccountAlreadyExistsException, IOException {
-        bank.createAccount("Tolga");
+    @ValueSource(strings = {"Tolga", "Faik", "Geheim"})
+    public void getAllAccountsTest(String account) throws AccountAlreadyExistsException, IOException {
+        /*bank.createAccount("Tolga");
         bank.createAccount("Faik");
         bank.createAccount("Geheim");
-
-        List<String> accounts = new ArrayList<>();
-        accounts.add("Geheim");
+        */
+        /*accounts.add("Geheim");
         accounts.add("Tolga");
         accounts.add("Faik");
-
-        assertEquals(accounts, bank.getAllAccounts());
-
-        assertDoesNotThrow(() -> bank.deleteAccount("Tolga"));
+        */
+        /*assertDoesNotThrow(() -> bank.deleteAccount("Tolga"));
         assertDoesNotThrow(() -> bank.deleteAccount("Faik"));
         assertDoesNotThrow(() -> bank.deleteAccount("Geheim"));
-        assertThrows(AccountDoesNotExistException.class, () -> bank.deleteAccount("Tolga"));
+         */
+        /*assertThrows(AccountDoesNotExistException.class, () -> bank.deleteAccount("Tolga"));
         assertThrows(AccountDoesNotExistException.class, () -> bank.deleteAccount("Faik"));
         assertThrows(AccountDoesNotExistException.class, () -> bank.deleteAccount("Geheim"));
-
+        */
         /*File file1 = new File("TestBank/Faik.json");
         File file2 = new File("TestBank/Geheim.json");
         File file3 = new File("TestBank/Tolga.json");
-
         file1.delete();
         file2.delete();
         file3.delete();*/
+
+        bank.createAccount(account);
+        List<String> accounts = new ArrayList<>();
+        accounts.add(account);
+        assertEquals(accounts, bank.getAllAccounts());
+        assertDoesNotThrow(() -> bank.deleteAccount(account));
+        assertThrows(AccountDoesNotExistException.class, () -> bank.deleteAccount(account));
+
     }
 
 
